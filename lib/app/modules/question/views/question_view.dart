@@ -1,6 +1,7 @@
 import 'package:application/app/ApplicationStyle/CustomButton.dart';
 import 'package:application/app/ApplicationStyle/CustomText.dart';
 import 'package:application/app/ApplicationStyle/appcolor.dart';
+import 'package:application/app/modules/quiz/views/quiz_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -31,7 +32,7 @@ class QuestionView extends GetView<QuestionController> {
                           Icons.arrow_back_rounded,
                         ),
                         onPressed: () {
-                          
+                          Get.to((QuizView()));
                         },
                       ),
                     ),

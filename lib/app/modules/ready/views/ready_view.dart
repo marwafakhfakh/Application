@@ -2,6 +2,7 @@ import 'package:application/app/ApplicationStyle/CustomButton.dart';
 import 'package:application/app/ApplicationStyle/CustomText.dart';
 import 'package:application/app/ApplicationStyle/ImageRessources.dart';
 import 'package:application/app/ApplicationStyle/appcolor.dart';
+import 'package:application/app/modules/login/bindings/login_binding.dart';
 import 'package:application/app/modules/login/views/login_view.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,7 @@ class ReadyView extends GetView<ReadyController> {
               child: CustomButton(
                 buttonText: 'Next',
                 onPressed: () {
-                  Get.to(LoginView());
+                  Get.to(LoginView(),binding: LoginBinding());
                 },
               ),
             ),

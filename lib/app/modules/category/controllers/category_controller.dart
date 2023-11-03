@@ -1,12 +1,29 @@
+import 'package:application/app/data/models/category_model.dart';
+import 'package:application/app/data/services/category_service.dart';
 import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
-  //TODO: Implement CategoryController
+  var isLoading = true.obs;
+    final RxList<Category> categoryList = <Category>[].obs;
 
-  final count = 0.obs;
+  //var categoryList = <Category>[].obs;
+
   @override
   void onInit() {
     super.onInit();
+    fetchCategories();
+  }
+  Future<void> fetchCategories() async {
+    try {
+      isLoading(true);
+      var categories = await CategoryServices.fetchCategories();
+      if (categories != null) {
+        categoryList.assignAll(categories);
+        print("cxcvbnnbv"+categoryList.length.toString());
+      }
+    } finally {
+      isLoading(false);
+    }
   }
 
   @override
@@ -18,6 +35,4 @@ class CategoryController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

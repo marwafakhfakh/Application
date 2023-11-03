@@ -1,7 +1,10 @@
 import 'package:application/app/ApplicationStyle/CustomButton.dart';
 import 'package:application/app/ApplicationStyle/CustomText.dart';
 import 'package:application/app/ApplicationStyle/appcolor.dart';
+import 'package:application/app/data/models/category_model.dart';
+import 'package:application/app/modules/category/bindings/category_binding.dart';
 import 'package:application/app/modules/category/views/category_view.dart';
+import 'package:application/app/modules/register/bindings/register_binding.dart';
 import 'package:application/app/modules/register/views/register_view.dart';
 
 import 'package:flutter/material.dart';
@@ -76,7 +79,7 @@ class LoginView extends GetView<LoginController> {
                                       margin: EdgeInsets.only(right: 50),
                                       child: TextButton(
                                         onPressed: () {
-                                            Get.to(RegisterView());
+                                            Get.to(RegisterView(),binding: RegisterBinding());
                                         },
                                         child: Text(
                                           'Sign Up',
@@ -128,7 +131,8 @@ class LoginView extends GetView<LoginController> {
                                             child: CustomButton(
                                               buttonText: 'Login',
                                               onPressed: () {
-                                                Get.to(CategoryView());
+                                               
+                                                Get.to(CategoryView(),binding:CategoryBinding());
                                               },
                                             ),
                                           )

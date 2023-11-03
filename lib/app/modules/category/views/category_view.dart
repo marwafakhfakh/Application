@@ -4,13 +4,15 @@ import 'package:application/app/ApplicationStyle/ImageRessources.dart';
 import 'package:application/app/ApplicationStyle/appcolor.dart';
 import 'package:application/app/modules/quiz/views/quiz_view.dart';
 import 'package:application/app/modules/register/views/register_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/category_controller.dart';
 
 class CategoryView extends GetView<CategoryController> {
-  const CategoryView({Key? key}) : super(key: key);
+  CategoryView({Key? key}) : super(key: key);
+  final CategoryController categoryController = Get.put(CategoryController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,98 +76,106 @@ class CategoryView extends GetView<CategoryController> {
                       onTap: () {
                         Get.to((QuizView()));
                       },
-                       child: ListView.builder(
-                         itemCount: (20.toDouble() / 2).toInt(),
-                          itemBuilder: (_, i) {
-                            return Row(
-                    children: [
-                      Container(
-                        width: (MediaQuery.of(context).size.width - 90) / 2,
-                        margin: EdgeInsets.only(left: 30, bottom: 20),
-                        height: 150,
-                        padding: EdgeInsets.only(bottom: 5),
-                        decoration: BoxDecoration(
-                            color: AppColors.PrimaryColorLight,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                  color:Colors.grey,
+                       child: Obx(()=>
+                         ListView.builder(
+                           //itemCount: (20.toDouble() / 2).toInt(),
+                     // itemCount: 5,
+                            itemCount:categoryController.categoryList.length,   
+                            itemBuilder: (_, i) {
+                          //final category = categoryController.categoryList[i];
+                              return Row( 
                                 
-                                  spreadRadius: 1,
-                                  blurRadius: 3,
-                                  offset: Offset(2.0, 2.0)
-                                  ),
-                              BoxShadow(
-                                  color:Colors.grey,
-                                
-                                  spreadRadius: 1,
-                                  blurRadius: 3,
-                                  offset: Offset(-2.0,-2.0)
-                                  ),
-                            ]
-                            ),
-                        child: Column(
-                          children: [
-                           Container(
-                            margin: EdgeInsets.all(10),
-                                          height: 100,
-                                          width: 100,
-                                          child: CustomImage(
-                                            imagePath:
-                                                'assets/Images/flutterrr.png',
-
-                                            // Remplacez par le chemin de votre image
-                                          ),
-                                          
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(left: 10,right: 10),
-                                          child:  Text(
-                                              'titre',
-                                              style: StyleResources
-                                                  .TEXT_STYLE, // Use the style from StyleResources
-                                            ),
-                                        )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: (MediaQuery.of(context).size.width - 90) / 2,
-                        margin: EdgeInsets.only(left: 30, bottom: 20),
-                        height: 150,
-                        padding: EdgeInsets.only(bottom: 5),
-                        decoration: BoxDecoration(
-                            color: AppColors.PrimaryColorLight,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
+                                           children: [
+                                            
+                                             Container(
+                          width: (MediaQuery.of(context).size.width - 90) / 2,
+                          margin: EdgeInsets.only(left: 30, bottom: 20),
+                          height: 150,
+                          padding: EdgeInsets.only(bottom: 5),
+                          decoration: BoxDecoration(
+                            
+                              color: AppColors.PrimaryColorLight,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                    color:Colors.grey,
+                                  
+                                    spreadRadius: 1,
+                                    blurRadius: 3,
+                                    offset: Offset(2.0, 2.0)
+                                    ),
+                                BoxShadow(
+                                    color:Colors.grey,
+                                  
+                                    spreadRadius: 1,
+                                    blurRadius: 3,
+                                    offset: Offset(-2.0,-2.0)
+                                    ),
+                              ]
+                              ),
+                          child: Column(
+                            children: [
+                             Container(
+                              margin: EdgeInsets.all(10),
+                                            height: 100,
+                                            width: 100,
+                                            child: CustomImage(
+                                              imagePath:
+                                                  'assets/Images/flutterrr.png',
                        
-                              BoxShadow(
-                                  color:Colors.grey,
-                                
-                                  spreadRadius: 1,
-                                  blurRadius: 3,
-                                  offset: Offset(2.0, 2.0)
-                                  ),
-                              BoxShadow(
-                                  color:Colors.grey,
-                                
-                                  spreadRadius: 1,
-                                  blurRadius: 3,
-                                  offset: Offset(-2.0,-2.0)
-                                  ),
-                          
-                            ]
-                            ),
-                        child: Center(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Text('hhhh'),
+                                              // Remplacez par le chemin de votre image
+                                            ),
+                                            
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(left: 10,right: 10),
+                                            child:  Text(
+                                                'titre',
+                                                style: StyleResources
+                                                    .TEXT_STYLE, // Use the style from StyleResources
+                                              ),
+                                          )
+                            ],
                           ),
-                        ),
-                      )
-                    ],
-                  );
-                }),
+                                             ),
+                                             Container(
+                          width: (MediaQuery.of(context).size.width - 90) / 2,
+                          margin: EdgeInsets.only(left: 30, bottom: 20),
+                          height: 150,
+                          padding: EdgeInsets.only(bottom: 5),
+                          decoration: BoxDecoration(
+                              color: AppColors.PrimaryColorLight,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                         
+                                BoxShadow(
+                                    color:Colors.grey,
+                                  
+                                    spreadRadius: 1,
+                                    blurRadius: 3,
+                                    offset: Offset(2.0, 2.0)
+                                    ),
+                                BoxShadow(
+                                    color:Colors.grey,
+                                  
+                                    spreadRadius: 1,
+                                    blurRadius: 3,
+                                    offset: Offset(-2.0,-2.0)
+                                    ),
+                            
+                              ]
+                              ),
+                          child: Center(
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text('hhhh'),
+                            ),
+                          ),
+                                             )
+                                           ],
+                                         );
+                                       }),
+                       ),
           ),
         )))
       ]),
