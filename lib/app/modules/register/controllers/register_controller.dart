@@ -58,12 +58,19 @@ doRegister() async {
   if(isValidate){
     isLoading(true);
     try{
-        var data = AuthService.register(name:nameController.text,email:emailController.text,password:passwordController.text);
+      print("sddddddddddddddddddddddddddddddddddddd");
+        var data = await AuthService.register(name:nameController.text,email:emailController.text,password:passwordController.text);
+      print(data);
       
+     
       // ignore: unnecessary_null_comparison
-      if (response != null) {
+      if (data != null) {
+        print("we are inside????");
  // var response;
-  await storage.write(key: "token", value: response.data.token);
+ final token = data['data']['token'] as String;
+  await storage.write(key: "token", value: token);
+
+  print(await storage.read(key:"token"));
 
        registerFormKey.currentState!.save();
       Get.to(CategoryView());

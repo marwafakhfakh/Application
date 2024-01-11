@@ -11,6 +11,7 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const QUIZ = _Paths.QUIZ;
   static const QUESTION = _Paths.QUESTION;
+  static const QUIZHISTORY = _Paths.QUIZHISTORY;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const REGISTER = '/register';
   static const QUIZ = '/quiz';
   static const QUESTION = '/question';
+  static const QUIZHISTORY = '/quizhistory';
 }

@@ -22,6 +22,20 @@ class StyleResources {
       color: AppColors.TextColor3,
       fontStyle: FontStyle.normal,
       fontFamily: 'Inter');
+        static TextStyle TITLE_Small = const TextStyle(
+     // fontSize: FontResources.spacing_middle_new,
+      fontSize: FontResources.textSizeSmall,
+      fontWeight: FontWeight.bold,
+      color: AppColors.TextColor3,
+      fontStyle: FontStyle.normal,
+      fontFamily: 'Inter');
+        static TextStyle MINITITLE = const TextStyle(
+     // fontSize: FontResources.spacing_middle_new,
+      fontSize: FontResources.textSizeLargeMedium,
+      fontWeight: FontWeight.bold,
+      color: AppColors.TextColor3,
+      fontStyle: FontStyle.normal,
+      fontFamily: 'Inter');
   static TextStyle WHITETITLE = const TextStyle(
       fontSize: FontResources.titleSizeLarge,
       fontWeight: FontWeight.bold,
@@ -48,6 +62,19 @@ class StyleResources {
       color: AppColors.TextColor4,
       fontStyle: FontStyle.normal,
       fontFamily: 'Inter');
+      
+  static TextStyle SUBTITLE_TITLE_STYLE = const TextStyle(
+      fontSize: FontResources.textSizeMedium,
+      fontWeight: FontWeight.normal,
+      color: AppColors.TextColor4,
+      fontStyle: FontStyle.normal,
+      fontFamily: 'Inter');
+      static TextStyle SUBTITLE_TITLE = const TextStyle(
+      fontSize: FontResources.SizeSmall,
+      fontWeight: FontWeight.normal,
+      color: AppColors.TextColor4,
+      fontStyle: FontStyle.normal,
+      fontFamily: 'Inter');
   static TextStyle MeduimTitle = const TextStyle(
      fontSize: FontResources.textSizeMedium,
       fontWeight: FontWeight.w500,
@@ -68,7 +95,9 @@ class StyleResources {
       fontStyle: FontStyle.normal,
       fontFamily: 'Inter');
   static TextStyle LABEL_TEXT_STYLE = const TextStyle(
-      fontSize: FontResources.SizeSmall,
+    
+      fontSize: FontResources.textSizeSmall,
+
       fontWeight: FontWeight.normal,
       color: AppColors.TextColor2,
       fontStyle: FontStyle.normal,
@@ -98,7 +127,7 @@ class StyleResources {
   static TextStyle SECONDARY_RICH_TEXT_FONT_STYLE = const TextStyle(
       fontWeight: FontWeight.normal,
       fontStyle: FontStyle.normal,
-      fontSize: FontResources.titleSizeLarge,
+      fontSize: FontResources.SizeSmall,
       color: AppColors.PrimaryColorLight,
       fontFamily: 'Inter');
 
@@ -108,16 +137,18 @@ class StyleResources {
       fontSize: FontResources.textSizeMedium,
       color: AppColors.TextColor3,
       fontFamily: 'Inter');
-/* 
-  static TextStyle DROPDOWN_TITLE_TEXT_STYLE = TextStyle(
-    fontFamily: 'Inter',
-    fontSize: 12,
-    color: Colors.grey.shade500,
-    fontWeight: FontWeight.w500,
-    fontStyle: FontStyle.normal,
-  );
 
-  static TextStyle DROPDOWN_TEXT_STYLE = TextStyle(
+  static TextStyle DROPDOWN_TITLE_TEXT_STYLE = TextStyle(
+    
+    fontSize: FontResources.textSizeSmall,
+
+      fontWeight: FontWeight.normal,
+      color: AppColors.PrimaryColorDark,
+      fontStyle: FontStyle.normal,
+      fontFamily: 'Inter');
+ 
+
+/*   static TextStyle DROPDOWN_TEXT_STYLE = TextStyle(
     fontFamily: 'Inter',
     fontSize: 14,
     color: Colors.grey.shade700,

@@ -13,7 +13,6 @@ class AuthService {
   
       Response response = await dio.post(
         "${ApiConfig.baseApi}/register", 
-         
         // Utilisez ApiConfig.baseApi pour accéder à la base de l'API
         data: {
           "name": name,
@@ -21,8 +20,9 @@ class AuthService {
           "password": password,
         },
       );
+    print("${ApiConfig.baseApi}/register");
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201 || response.statusCode == 200) {
         return response.data;
       } else {
         throw Exception('Failed to register');
@@ -30,5 +30,29 @@ class AuthService {
     
   }
 
-  // login ...
+  // login
+  static Future<Map<String, dynamic>> login({
+  
+    required String email,
+    required String password,
+  }) async {
+  
+      Response response = await dio.post(
+        "${ApiConfig.baseApi}/login", 
+        // Utilisez ApiConfig.baseApi pour accéder à la base de l'API
+        data: {
+          "email": email,
+          "password": password,
+        },
+      );
+    print("${ApiConfig.baseApi}/login");
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return response.data;
+      } else {
+        throw Exception('Failed to login');
+      }
+    
+  }
+
 }

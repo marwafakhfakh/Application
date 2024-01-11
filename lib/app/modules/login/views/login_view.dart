@@ -96,6 +96,14 @@ class LoginView extends GetView<LoginController> {
                                       child: Column(
                                         children: [
                                           TextFormField(
+                                              controller: controller.emailController,
+                                            validator: (v) {
+                                              return controller.validateEmail(v!);
+                                            },
+                                            onSaved: (v) {
+                                              controller.email = v!;
+                                            },
+                                             keyboardType: TextInputType.emailAddress,
                                             decoration: InputDecoration(
                                               labelText: 'Email',
                                               prefixIcon: Icon(Icons.email),
@@ -112,6 +120,13 @@ class LoginView extends GetView<LoginController> {
                                           ),
                                           SizedBox(height: 30.0),
                                           TextFormField(
+                                             controller: controller.passwordController,
+                                              validator: (v) {
+                                                return controller.validatePassword(v!);
+                                              },
+                                              onSaved: (v) {  controller.password =v!;},
+                                              keyboardType: TextInputType.visiblePassword,
+                                              obscureText: true,
                                             decoration: InputDecoration(
                                               labelText: 'Password',
                                               prefixIcon: Icon(Icons.password),
@@ -124,6 +139,14 @@ class LoginView extends GetView<LoginController> {
                                               ),
                                             ),
                                           ),
+                                         
+                                           const SizedBox(
+                                      height: 30,
+                                    ),
+                                    Obx(() => controller.isLoading.value == true ?
+                                   const Center(child:  
+                                   CircularProgressIndicator()): const Text(""),),
+                                         
                                           const SizedBox(
                                             height: 30,
                                           ),
@@ -131,7 +154,7 @@ class LoginView extends GetView<LoginController> {
                                             child: CustomButton(
                                               buttonText: 'Login',
                                               onPressed: () {
-                                               
+                                                controller.doLogin();
                                                 Get.to(CategoryView(),binding:CategoryBinding());
                                               },
                                             ),

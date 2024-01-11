@@ -30,7 +30,7 @@ class Category {
     updatedAt = json['updated_at'];
   }
 
-  get imagePath => null;
+  //get imagePath => null;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -42,4 +42,43 @@ class Category {
     data['updated_at'] = this.updatedAt;
     return data;
   }
+
+
+  static fromMap(Category categoryMap) {}
+}
+
+
+//AddCategory
+
+
+AddCategory addCategoryFromJson(String str) => AddCategory.fromJson(json.decode(str));
+
+String addCategoryToJson(AddCategory data) => json.encode(data.toJson());
+
+class AddCategory {
+    
+    String name;
+    String departement;
+    String image;
+
+    AddCategory({
+     
+        required this.name,
+        required this.departement,
+        required this.image,
+    });
+
+    factory AddCategory.fromJson(Map<String, dynamic> json) => AddCategory(
+       // titre: DateTime.parse(json["titre"]),
+        name:json["name"],
+        departement: json["departement"],
+        image: json["image"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        //"titre": "${titre.year.toString().padLeft(4, '0')}-${titre.month.toString().padLeft(2, '0')}-${titre.day.toString().padLeft(2, '0')}",
+        "name":name,
+        "departement": departement,
+        "image": image,
+    };
 }

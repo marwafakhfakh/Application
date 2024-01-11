@@ -10,6 +10,8 @@ import '../modules/question/bindings/question_binding.dart';
 import '../modules/question/views/question_view.dart';
 import '../modules/quiz/bindings/quiz_binding.dart';
 import '../modules/quiz/views/quiz_view.dart';
+import '../modules/quizhistory/bindings/quizhistory_binding.dart';
+import '../modules/quizhistory/views/quizhistory_view.dart';
 import '../modules/ready/bindings/ready_binding.dart';
 import '../modules/ready/views/ready_view.dart';
 import '../modules/register/bindings/register_binding.dart';
@@ -52,18 +54,23 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.REGISTER,
-      page: () =>  RegisterView(),
+      page: () => RegisterView(),
       binding: RegisterBinding(),
     ),
     GetPage(
       name: _Paths.QUIZ,
-      page: () => const QuizView(),
+      page: () => QuizView(),
       binding: QuizBinding(),
     ),
     GetPage(
       name: _Paths.QUESTION,
       page: () => const QuestionView(),
       binding: QuestionBinding(),
+    ),
+    GetPage(
+      name: _Paths.QUIZHISTORY,
+      page: () => const QuizhistoryView(),
+      binding: QuizhistoryBinding(),
     ),
   ];
 }

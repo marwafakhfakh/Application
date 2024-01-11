@@ -2,6 +2,7 @@ import 'package:application/app/ApplicationStyle/CustomButton.dart';
 import 'package:application/app/ApplicationStyle/CustomText.dart';
 import 'package:application/app/ApplicationStyle/ImageRessources.dart';
 import 'package:application/app/ApplicationStyle/appcolor.dart';
+import 'package:application/app/modules/quiz/bindings/quiz_binding.dart';
 import 'package:application/app/modules/quiz/views/quiz_view.dart';
 import 'package:application/app/modules/register/views/register_view.dart';
 import 'package:flutter/foundation.dart';
@@ -12,7 +13,6 @@ import '../controllers/category_controller.dart';
 
 class CategoryView extends GetView<CategoryController> {
   CategoryView({Key? key}) : super(key: key);
-  final CategoryController categoryController = Get.put(CategoryController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +48,7 @@ class CategoryView extends GetView<CategoryController> {
                         ),
                         onPressed: () {
                           
-                    _showCategoryDialog(context);
+                  //  _showCategoryDialog(context);
                         },
                       ),
                     ),
@@ -61,7 +61,7 @@ class CategoryView extends GetView<CategoryController> {
                 padding: EdgeInsets.only(left: 30),
                 child: Container(
                   child: Text(
-                    'Category',
+                  "Category",
                     style: StyleResources
                         .BIGTITLE, // Use the style from StyleResources
                   ),
@@ -69,193 +69,105 @@ class CategoryView extends GetView<CategoryController> {
              ),
                Expanded(
           child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.only(top: 30),
               child: OverflowBox(
+                
                   maxWidth: MediaQuery.of(context).size.width,
-                  child: InkWell(
-                      onTap: () {
-                        Get.to((QuizView()));
-                      },
+                
                        child: Obx(()=>
-                         ListView.builder(
-                           //itemCount: (20.toDouble() / 2).toInt(),
-                     // itemCount: 5,
-                            itemCount:categoryController.categoryList.length,   
-                            itemBuilder: (_, i) {
-                          //final category = categoryController.categoryList[i];
-                              return Row( 
-                                
-                                           children: [
-                                            
-                                             Container(
-                          width: (MediaQuery.of(context).size.width - 90) / 2,
-                          margin: EdgeInsets.only(left: 30, bottom: 20),
-                          height: 150,
-                          padding: EdgeInsets.only(bottom: 5),
-                          decoration: BoxDecoration(
-                            
-                              color: AppColors.PrimaryColorLight,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                    color:Colors.grey,
-                                  
-                                    spreadRadius: 1,
-                                    blurRadius: 3,
-                                    offset: Offset(2.0, 2.0)
-                                    ),
-                                BoxShadow(
-                                    color:Colors.grey,
-                                  
-                                    spreadRadius: 1,
-                                    blurRadius: 3,
-                                    offset: Offset(-2.0,-2.0)
-                                    ),
-                              ]
-                              ),
-                          child: Column(
-                            children: [
-                             Container(
-                              margin: EdgeInsets.all(10),
-                                            height: 100,
-                                            width: 100,
-                                            child: CustomImage(
-                                              imagePath:
-                                                  'assets/Images/flutterrr.png',
-                       
-                                              // Remplacez par le chemin de votre image
-                                            ),
-                                            
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(left: 10,right: 10),
-                                            child:  Text(
-                                                'titre',
-                                                style: StyleResources
-                                                    .TEXT_STYLE, // Use the style from StyleResources
-                                              ),
-                                          )
-                            ],
-                          ),
-                                             ),
-                                             Container(
-                          width: (MediaQuery.of(context).size.width - 90) / 2,
-                          margin: EdgeInsets.only(left: 30, bottom: 20),
-                          height: 150,
-                          padding: EdgeInsets.only(bottom: 5),
-                          decoration: BoxDecoration(
-                              color: AppColors.PrimaryColorLight,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                         
-                                BoxShadow(
-                                    color:Colors.grey,
-                                  
-                                    spreadRadius: 1,
-                                    blurRadius: 3,
-                                    offset: Offset(2.0, 2.0)
-                                    ),
-                                BoxShadow(
-                                    color:Colors.grey,
-                                  
-                                    spreadRadius: 1,
-                                    blurRadius: 3,
-                                    offset: Offset(-2.0,-2.0)
-                                    ),
-                            
-                              ]
-                              ),
-                          child: Center(
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text('hhhh'),
+                         GridView.builder(
+
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2, // number of items in each row
+                              mainAxisSpacing: 5.0, // spacing between rows
+                              crossAxisSpacing: 5.0, // spacing between columns
                             ),
-                          ),
-                                             )
-                                           ],
-                                         );
+                            padding: EdgeInsets.all(8.0), // padding around the grid
+ 
+                            itemCount:controller.categoryList.length,   
+                            itemBuilder: (context, index) {
+                          final category = controller.categoryList[index];
+                              return InkWell(
+                                
+                                  onTap: () {
+                                    print(category.id);
+                                    Get.off(QuizView(),binding: QuizBinding(),arguments: [{"category_id":category.id}]);
+                                  },
+                                            child: Row( 
+                                      
+                                  
+                                             children: [
+                                              
+                                               Container(
+                                                        width: (MediaQuery.of(context).size.width - 90) / 2,
+                                                        margin: EdgeInsets.only(left: 20, bottom: 20,),
+                                                        height: 170,
+                                                        padding: EdgeInsets.only(bottom: 5),
+                                                        decoration: BoxDecoration(
+                                                          
+                                color: AppColors.PrimaryColorLight,
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color:Colors.grey,
+                                    
+                                      spreadRadius: 1,
+                                      blurRadius: 3,
+                                      offset: Offset(2.0, 2.0)
+                                      ),
+                                  BoxShadow(
+                                      color:Colors.grey,
+                                    
+                                      spreadRadius: 1,
+                                      blurRadius: 3,
+                                      offset: Offset(-2.0,-2.0)
+                                      ),
+                                ],
+                                
+                                ),
+                                
+                                
+                                
+                                                        child: Column(
+                                                          children: [
+                                                        Container(
+                                margin: EdgeInsets.all(10),
+                                              height: 100,
+                                              width: 100,
+                                              child: Image.network(
+                                                category.image ?? "image",
+                                              )
+                                              
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(left: 10,right: 10),
+                                              child:  Text(
+                                                  category.name ?? "Name",
+                                                  style: StyleResources
+                                                      .TEXT_STYLE, // Use the style from StyleResources
+                                                ),
+                                            ),
+                                                Container(
+                                              margin: EdgeInsets.only(left: 10,right: 10),
+                                              child:  Text(
+                                                  category.departement ?? "Departement",
+                                                  style: StyleResources
+                                                      .TEXT_STYLE, // Use the style from StyleResources
+                                                ),
+                                            )
+                                                          ],
+                                                        ),
+                                               ),
+                                                        
+                                             ],
+                                           ),
+                              );
                                        }),
                        ),
           ),
-        )))
+        ))
       ]),
     );
   }
 
-  Future<void> _showCategoryDialog(BuildContext context) async
-   {
-    String categoryName = '';
-    String departmentName = '';
-    String imagePath = '';
-
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog
-        (
-                title: Text('Ajouter une catégorie'),
-                contentPadding: EdgeInsets.all(20.0),
-                children: <Widget>
-                [
-                  TextFormField(
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.add),
-                      labelText: 'Nom du Catégorie',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(color: AppColors.TextColor4),
-                      ),
-                    ),
-                    onChanged: (value) {
-                      categoryName = value;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Nom du département',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(color: AppColors.TextColor4),
-                      ),
-                    ),
-                    onChanged: (value) {
-                      departmentName = value;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Chemin de l\'image',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(color: AppColors.TextColor4),
-                      ),
-                    ),
-                    onChanged: (value) {
-                      imagePath = value;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: CustomButton(
-                      buttonText: 'Ajouter',
-                      onPressed: () {
-                         Get.back();
-                      },
-                    ),
-                  )
-                ],
-        );
-                          }
-                       );
-                   
-  
-  }
 }

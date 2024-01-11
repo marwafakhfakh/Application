@@ -1,6 +1,7 @@
 import 'package:application/app/ApplicationStyle/CustomButton.dart';
 import 'package:application/app/ApplicationStyle/CustomText.dart';
 import 'package:application/app/ApplicationStyle/appcolor.dart';
+import 'package:application/app/modules/category/bindings/category_binding.dart';
 import 'package:application/app/modules/category/views/category_view.dart';
 import 'package:application/app/modules/login/views/login_view.dart';
 import 'package:application/app/modules/register/controllers/register_controller.dart';
@@ -9,9 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterView extends GetView<RegisterController> {
+ /* createAccountPressed() async{
+    bool emailValid =Reg
+  }*/
  RegisterView({Key? key}) : super(key: key);
     final registerFormKey = GlobalKey<FormState>();
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +71,7 @@ class RegisterView extends GetView<RegisterController> {
                               margin: EdgeInsets.only(right: 50),
                               child: TextButton(
                                 onPressed: () {
-                                  Get.to(CategoryView());
+                                
                                 },
                                 child: Text(
                                   'Sign Up',
@@ -165,6 +169,7 @@ class RegisterView extends GetView<RegisterController> {
                                         buttonText: 'Sign Up',
                                         onPressed: () {
                                           controller.doRegister();
+                                          Get.to(CategoryView(),binding: CategoryBinding());
                                           //Get.to(CategoryView());
                                         },
                                       ),
