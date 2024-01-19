@@ -2,6 +2,7 @@ import 'package:application/app/ApplicationStyle/CustomButton.dart';
 import 'package:application/app/ApplicationStyle/CustomText.dart';
 import 'package:application/app/ApplicationStyle/ImageRessources.dart';
 import 'package:application/app/ApplicationStyle/appcolor.dart';
+import 'package:application/app/modules/category/views/form_view.dart';
 import 'package:application/app/modules/quiz/bindings/quiz_binding.dart';
 import 'package:application/app/modules/quiz/views/quiz_view.dart';
 import 'package:application/app/modules/register/views/register_view.dart';
@@ -35,7 +36,7 @@ class CategoryView extends GetView<CategoryController> {
                           Icons.arrow_back_rounded,
                         ),
                         onPressed: () {
-                          Get.to(RegisterView());
+            
                         },
                       ),
                     ),
@@ -47,7 +48,7 @@ class CategoryView extends GetView<CategoryController> {
                           Icons.add,
                         ),
                         onPressed: () {
-                          
+                            Get.to(FormView());
                   //  _showCategoryDialog(context);
                         },
                       ),
@@ -91,7 +92,9 @@ class CategoryView extends GetView<CategoryController> {
                                 
                                   onTap: () {
                                     print(category.id);
-                                    Get.off(QuizView(),binding: QuizBinding(),arguments: [{"category_id":category.id}]);
+                                    Get.off(QuizView(),binding: QuizBinding(),
+                                    arguments: [{"category_id":category.id}]
+                                    );
                                   },
                                             child: Row( 
                                       

@@ -17,13 +17,16 @@ import 'package:get/get.dart';
 
 class FormView extends GetView<QuizController> {
   FormView({Key? key}) : super(key: key);
-  File? _selectedImage;
+ // File? _selectedImage;
   late AddQuiz quizData;
   int niveau_id = 1;
   String titre = "";
   String description = "";
   //category_id= category;
   String imageName = "";
+  //Category? selectedValue;
+  Rx<Category?> selectedValue = Rx<Category?>(null);
+  Rx<File?> _selectedImage = Rx<File?>(null);
 
   @override
   Widget build(BuildContext context) {
@@ -75,88 +78,88 @@ class FormView extends GetView<QuizController> {
                 SizedBox(
                   height: 20,
                 ),
-                Center(
-      child:
-      DropdownButtonHideUnderline(
-        child: DropdownButton2<Category>(
-          isExpanded: true,
-          hint: Text(
-            'Select Item',
-            style: TextStyle(
-              fontSize: 14,
-              color: Theme.of(context).hintColor,
-            ),
-          ),
-          items: controller.categoryList
-              .map((Category item) => DropdownMenuItem(
-                    value: item,
-                    child: Text(
-                      item.name.toString(),
-                      style: const TextStyle(
-                        fontSize: 14,
+                Obx(
+                  () => Center(
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton2<Category?>(
+                        isExpanded: true,
+                        hint: Text(
+                          'Select Item',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).hintColor,
+                          ),
+                        ),
+                        items: controller.categoryList
+                            .map((item) => DropdownMenuItem(
+                                  value: item,
+                                  child: Text(
+                                    item.name.toString(),
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+
+                        value: selectedValue.value,
+                        onChanged: (value) {
+                          selectedValue.value = value!;
+                        },
+                        buttonStyleData: const ButtonStyleData(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          height: 40,
+                          width: 200,
+                        ),
+                        dropdownStyleData: const DropdownStyleData(
+                          maxHeight: 200,
+                        ),
+                        menuItemStyleData: const MenuItemStyleData(
+                          height: 40,
+                        ),
+                        dropdownSearchData: DropdownSearchData(
+                          searchController: controller.textEditingController,
+                          searchInnerWidgetHeight: 50,
+                          searchInnerWidget: Container(
+                            height: 50,
+                            padding: const EdgeInsets.only(
+                              top: 8,
+                              bottom: 4,
+                              right: 8,
+                              left: 8,
+                            ),
+                            child: TextFormField(
+                              expands: true,
+                              maxLines: null,
+                              controller: controller.textEditingController,
+                              decoration: InputDecoration(
+                                isDense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 8,
+                                ),
+                                hintText: 'Search for an item...',
+                                hintStyle: const TextStyle(fontSize: 12),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                            ),
+                          ),
+                          searchMatchFn: (item, searchValue) {
+                            return item.value.toString().contains(searchValue);
+                          },
+                        ),
+                        //This to clear the search value when you close the menu
+                        onMenuStateChange: (isOpen) {
+                          if (!isOpen) {
+                            controller.textEditingController.clear();
+                          }
+                        },
                       ),
                     ),
-                  ))
-              .toList(),
-          value: controller.selectedValue.value,
-          onChanged: (value) {
-            setState(() {
-              controller.selectedValue.value = value!;
-            });
-          },
-          buttonStyleData: const ButtonStyleData(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            height: 40,
-            width: 200,
-          ),
-          dropdownStyleData: const DropdownStyleData(
-            maxHeight: 200,
-          ),
-          menuItemStyleData: const MenuItemStyleData(
-            height: 40,
-          ),
-          dropdownSearchData: DropdownSearchData(
-            searchController: controller.textEditingController,
-            searchInnerWidgetHeight: 50,
-            searchInnerWidget: Container(
-              height: 50,
-              padding: const EdgeInsets.only(
-                top: 8,
-                bottom: 4,
-                right: 8,
-                left: 8,
-              ),
-              child: TextFormField(
-                expands: true,
-                maxLines: null,
-                controller: controller.textEditingController,
-                decoration: InputDecoration(
-                  isDense: true,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 8,
-                  ),
-                  hintText: 'Search for an item...',
-                  hintStyle: const TextStyle(fontSize: 12),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-              ),
-            ),
-            searchMatchFn: (item, searchValue) {
-              return item.value.toString().contains(searchValue);
-            },
-          ),
-          //This to clear the search value when you close the menu
-          onMenuStateChange: (isOpen) {
-            if (!isOpen) {
-              controller.textEditingController.clear();
-            }
-          },
-        ),
-      ),
-    ),
 
                 Container(
                   child: CustomButton(
@@ -167,9 +170,11 @@ class FormView extends GetView<QuizController> {
                   ),
                 ),
                 //images
-                _selectedImage != null
-                    ? Image.file(_selectedImage!)
-                    : const Text("please select a photo"),
+                Obx(()=>
+                   _selectedImage.value != null
+                      ? Image.file(_selectedImage.value!)
+                      : const Text("please select a photo"),
+                ),
                 Container(
                   child: CustomButton(
                     buttonText: 'Ajouter image camera',
@@ -184,29 +189,29 @@ class FormView extends GetView<QuizController> {
                 ),
                 Container(
                   child: CustomButton(
-                    buttonText: 'Ajouté',
-                    onPressed: () async {
-                      //  print("image"+_selectedImage!);
-
-                      if (_selectedImage != null) {
-                        quizData = AddQuiz(
-                          titre:titre,
-                          description: description,
-                        categorieId: controller.selectedValue.value.id!,
-                          historiqueId: 1,
-                          niveauId: niveau_id,
-                            image: _selectedImage!.path,
-                        );
-
-                        await controller.addQuiz(quizData, imageName);
-                        Get.to(QuizView());
-
-                        // Get.to(QuizView(), arguments: quizData);
-                      } else {
-                        print("Please select an image");
-                      }
-                    },
-                  ),
+                      buttonText: 'Ajouté',
+                      onPressed: () async {
+                        //  print("image"+ _selectedImage.value!.path);
+                        if (_selectedImage.value != null) {
+                          if (selectedValue.value != null &&
+                              selectedValue.value!.id != null) {
+                            quizData = AddQuiz(
+                              titre: titre,
+                              description: description,
+                              categorieId: selectedValue.value!.id!,
+                              historiqueId: 1,
+                              niveauId: niveau_id,
+                              image: _selectedImage.value!.path,
+                            );
+                            await controller.addQuiz(quizData, imageName);
+                            Get.to(QuizView());
+                          } else {
+                            print("Please select a category");
+                          }
+                        } else {
+                          print("Please select an image");
+                        }
+                      }),
                 ),
                 SizedBox(
                   height: 12,
@@ -232,10 +237,10 @@ class FormView extends GetView<QuizController> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (returnedImage == null) return;
-    print("image" + (_selectedImage?.path ?? "No image selected"));
+    print("image" + (_selectedImage.value?.path ?? "No image selected"));
 
     imageName = returnedImage.name;
-    _selectedImage = File(returnedImage.path);
+    _selectedImage.value = File(returnedImage.path);
   }
 
   void _pickerImageFromCamera() async {
@@ -243,7 +248,7 @@ class FormView extends GetView<QuizController> {
         await ImagePicker().pickImage(source: ImageSource.camera);
 
     if (returnedImage == null) return;
-    print("image" + (_selectedImage?.path ?? "No image selected"));
-    _selectedImage = File(returnedImage.path);
+    print("image" + (_selectedImage.value?.path ?? "No image selected"));
+    _selectedImage.value = File(returnedImage.path);
   }
 }

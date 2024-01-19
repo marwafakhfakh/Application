@@ -16,7 +16,11 @@ class QuizController extends GetxController {
     Rx<Category> selectedValue = Category().obs;
   dynamic categorie_id =Get.arguments[0]["category_id"] ;
   final TextEditingController textEditingController = TextEditingController();
+//final selected = Category().obs;
 
+  //  void setSelected(Category? value){
+  //    selectedValue.value = value!;
+  //  }
   @override
  void onInit() async{
   print(categorie_id);
@@ -50,6 +54,7 @@ Future<void> fetchCategories() async {
       isLoading(true);
       final List<Category>? categoryListData = await CategoryServices.fetchCategories();
       print("hhhhhhhhhhhh");
+     // categoryListData!.map((e) {print(e);});
       print(categoryListData);
       if (categoryListData != null && categoryListData.isNotEmpty) {
         categoryList.assignAll(categoryListData);

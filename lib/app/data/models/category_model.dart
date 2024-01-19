@@ -81,4 +81,6 @@ class AddCategory {
         "departement": departement,
         "image": image,
     };
+ //    @override
+  String toString() ;
 }

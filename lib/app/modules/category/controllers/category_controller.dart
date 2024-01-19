@@ -4,6 +4,8 @@ import 'package:application/app/data/services/category_service.dart';
 
 class CategoryController extends GetxController {
   var isLoading = true.obs;
+    RxBool isAddingCategory = false.obs;
+
   final RxList<Category> categoryList = <Category>[].obs;
 
   @override
@@ -29,6 +31,22 @@ class CategoryController extends GetxController {
     }
   }
 
-  void addCategory(AddCategory categoryData) {}
-  
+//   {}
+  Future <void> addCategory(AddCategory categoryData) async {
+    try {
+      isAddingCategory(true);
+      final Map<String, dynamic>? addData = await CategoryServices.addCategory(categoryData);
+
+      if (addData != null) {
+        print("Quiz added successfully!");
+        fetchCategories();
+      } else {
+        print("Failed to add quiz");
+      }
+    } catch (e) {
+      print("Error: $e");
+    } finally {
+      isAddingCategory(false);
+    }
+  }
 }
