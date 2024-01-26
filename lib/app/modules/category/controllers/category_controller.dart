@@ -32,7 +32,7 @@ class CategoryController extends GetxController {
   }
 
 //   {}
-  Future <void> addCategory(AddCategory categoryData) async {
+  Future <void> addCategory(AddCategory categoryData, String imageName) async {
     try {
       isAddingCategory(true);
       final Map<String, dynamic>? addData = await CategoryServices.addCategory(categoryData);
